@@ -1,0 +1,41 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+android {
+    namespace "com.example.camdupro"
+    compileSdk 36
+    ndkVersion "26.1.10909125"
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+
+    defaultConfig {
+        applicationId "com.example.camdupro"
+        minSdk 21
+        // Alinhado com L003 (exigência do Google Play verificada em 2026-10: targetSdk 36)
+        targetSdk 36
+        versionCode flutter.versionCode
+        versionName flutter.versionName
+    }
+
+    buildTypes {
+        release {
+            // TEMPORÁRIO para testes e CI: assina com a chave de debug para gerar APK instalável.
+            // Antes de publicar na Play Store, substituir por keystore própria fora do repositório (ver SEGURANCA_HANDOFF.md).
+            signingConfig signingConfigs.debug
+        }
+    }
+}
+
+flutter {
+    source '../..'
+}
